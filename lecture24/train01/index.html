@@ -15,13 +15,23 @@
           <h5 class="id">@zerobase_frontend</h5>
           <p>누구나 프론트엔드 개발자가 될 수 있어요!</p>
         </div>
-        <!-- We will put our React component inside this div. -->
+        <!-- We will put our React component inside this div. == DOM 컨테이너 설치-->
+        <div id="follow_button_container"></div>
       </div>
     </div>
 
     <!-- Load React. -->
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-
+    <!-- React, React DOM에 해당하는 js파일을 다운받아 넣는 것 -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
     <!-- Load our React component. -->
+    <script src="follow_button.js"></script>
   </body>
 </html>

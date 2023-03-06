@@ -22,8 +22,8 @@ function FollowButton() {
 
   const followBtnStyle = {
     ...commonBtnStyle,
+    backgroundColor: "violet",
     color: "white",
-    backgroundColor: "black",
   };
 
   const followingBtnStyle = {
@@ -45,7 +45,7 @@ function FollowButton() {
   return (
     <div
       onClick={() => setFollowing(!following)}
-      style={following ? followingBtnStyle : followingBtnStyle}
+      style={following ? followingBtnStyle : followBtnStyle}
     >
       {following ? "following" : "Follow"}
     </div>

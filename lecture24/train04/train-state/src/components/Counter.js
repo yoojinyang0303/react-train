@@ -3,42 +3,52 @@ import React, { useState } from "react";
 
 export default function Counter() {
   // useState의 네이밍 컨밴션:: [state - 값, setState - 값을 변경할 때 쓰는 함수]
-  const [count, setCount] = useState(0);
-  //show and hide - boolean으로
-  const [show, setShow] = useState(true);
+
   // +, -, * 연산 - string
   const operators = ["+", "-", "*"];
-  const [operator, setOperator] = useState(operators[0]);
+  const [info, setInfo] = useState({
+    count: 0,
+    show: true,
+    operator: operators[0],
+  });
   return (
     <div>
       <button
         onClick={() => {
           let result;
-          if (operator === "+") {
-            result = count + 1;
+          if (info.operator === "+") {
+            result = info.count + 1;
           }
-          if (operator === "-") {
-            result = count - 1;
+          if (info.operator === "-") {
+            result = info.count - 1;
           }
-          if (operator === "*") {
-            result = count * 1;
+          if (info.operator === "*") {
+            result = info.count * 1;
           }
-          setCount(result);
+          //   setCount(result);
+          setInfo({ ...info, count: result });
         }}
       >
-        {operator}1
+        {info.operator}1
       </button>
-      <button onClick={() => setShow(!show)}>Show & Hide</button>
+      <button
+        onClick={() => {
+          setInfo({ ...info, show: !info.show });
+        }}
+      >
+        Show & Hide
+      </button>
       <button
         onClick={() => {
           const idx = Math.floor(Math.random() * operators.length);
-          setOperator(operators[idx]);
+          // setOperator(operators[idx]);
+          setInfo({ ...info, operator: operators[idx] });
         }}
       >
         Change Operator
       </button>
       <br />
-      {show && `Counter: ${count}`}
+      {info.show && `Counter: ${info.count}`}
     </div>
   );
 }

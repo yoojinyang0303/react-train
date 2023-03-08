@@ -10,7 +10,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header text={"Learn React Props A"} />
+      <Header text={"Learn React Props B"} />
     </div>
   );
 }

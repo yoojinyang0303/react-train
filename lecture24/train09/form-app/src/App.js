@@ -1,9 +1,10 @@
 import logo from "./logo.svg";
 import "./App.css";
-import SimpleForm from "./components/SimpleForm";
+// import SimpleForm from "./components/SimpleForm";
+import UnControlledForm from "./components/UnControlledForm";
 
 function App() {
-  return <SimpleForm />;
+  return <UnControlledForm />;
 }
 
 export default App;

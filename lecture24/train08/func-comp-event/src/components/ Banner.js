@@ -3,10 +3,11 @@ import React, { useState } from "react";
 const Banner = () => {
   //   let closeBoolean = true;
   const [visible, setVisible] = useState(true);
-  function close() {
+  function close(e) {
     // closeBoolean = !closeBoolean;
     // console.log("closeBooean: " + closeBoolean);
-    setVisible(false);
+    e.stopPropagation(); // eventBubbling 방지 역할 함수
+    setVisible(false); //비동기
   }
   function eventAlert() {
     return alert("10% 할인 쿠폰에 당첨 되었습니다!");

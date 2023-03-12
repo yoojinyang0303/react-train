@@ -7,6 +7,7 @@ export default function ReactDocPage() {
   console.log(params); // url parameter 잘 불러오는지 확인용 로그 찍기
 
   const navigate = useNavigate();
+
   return (
     <>
       <h5 onClick={() => navigate("/")}>logo</h5>

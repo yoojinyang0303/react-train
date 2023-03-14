@@ -7,7 +7,7 @@ import TechPage from "./components/TechPage";
 import JavaScriptPage from "./components/JavaScriptPage";
 import ReactPage from "./components/ReactPage";
 import ReactDocPage from "./components/ReactDocPage";
-
+import UserStore from "./store/user";
 // router 구성
 // root url: main page component
 // tech url : tech page component
@@ -15,7 +15,7 @@ import ReactDocPage from "./components/ReactDocPage";
 
 function App() {
   return (
-    <>
+    <UserStore>
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<MainPage />} />
@@ -27,7 +27,7 @@ function App() {
           <Route path={"/blog"} element={<BlogPage />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </UserStore>
   );
 }
 

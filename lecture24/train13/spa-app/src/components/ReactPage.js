@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useFetcher } from "react-router-dom";
+import axios from "axios";
+import useSWR from "swr";
 
 export default function ReactPage() {
   // api call -> react에 해당하는 글의 목록을 응답 받음.
   // 아래는 static한 데이터 (임시용)
-  const [docs, setDocs] = useState([]);
+  // const [docs, setDocs] = useState([]);
+  const [number, setNumber] = useState(0);
+
+  //useSWR
+  async function fetcher(url) {
+    const result = await axios.get(url);
+    console.log(result.data); // 상태값
+    // setDocs(result.data);
+    return result.data;
+  }
+  const { data: docs, error } = useSWR("posts", () =>
+    fetcher("https://jsonplaceholder.typicode.com/posts")
+  );
 
   // const docs = [
   //   {
@@ -35,25 +49,49 @@ export default function ReactPage() {
   // ];
 
   // api 호출 데이터
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-      // console.log(res);
-      const result = await res.json();
-      console.log(result); // 활용하기 위해 "상태값"으로 만들어 관리
-      // setDocs(result);
+  // (1) fetch API 방식
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  //     // console.log(res);
+  //     const result = await res.json();
+  //     console.log(result); // 활용하기 위해 "상태값"으로 만들어 관리
+  //     // setDocs(result);
 
-      return result;
-    }
+  //     return result;
+  //   }
 
-    fetchData().then((res) => {
-      setDocs(res);
-    });
-  }, []);
+  //   fetchData().then((res) => {
+  //     setDocs(res);
+  //   });
+  // }, []);
+
+  // (2) axios (권장!!!)
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const result = await axios.get(
+  //       "https://jsonplaceholder.typicode.com/posts"
+  //     );
+  //     console.log(result); // 활용하기 위해 "상태값"으로 만들어 관리
+  //     console.log(result.data); // 활용하기 위해 "상태값"으로 만들어 관리
+  //     // setDocs(result);
+
+  //     return result.data;
+  //   }
+
+  //   fetchData().then((res) => {
+  //     setDocs(res);
+  //   });
+  // }, []);
+
+  //
+  if (error) return <div>Failed to load...!</div>;
+  if (!docs) return <div>Loading...</div>;
 
   return (
     <>
       <div>
+        <button onClick={() => setNumber(number + 1)}>{number}</button>
         {docs.map((doc) => (
           <Link
             to={`${doc.id}`}
